@@ -46,3 +46,6 @@ func drawReversedShape() {
 
 drawShape()
 drawReversedShape()
+
+drawShape()
+drawReversedShape()
