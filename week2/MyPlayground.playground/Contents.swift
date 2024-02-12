@@ -1,8 +1,8 @@
 import SwiftUI
 import PlaygroundSupport
 
-let wide = 1024.0;
-let high = 1024.0;
+let wide = 1024.0/2;
+let high = 1024.0/4 - 100;
 
 struct ContentView: View {
   var body: some View {
