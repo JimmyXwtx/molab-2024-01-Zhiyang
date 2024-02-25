@@ -19,10 +19,10 @@ struct ContentView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 15) {
+            VStack(spacing: 20) {
                 dateTimeView.frame(maxWidth: .infinity).foregroundColor(.white)
                 Button("MOON") {
-                    withAnimation(.easeInOut(duration: 1)) {
+                    withAnimation(.easeInOut(duration: 0.5)) {
                         if showShape {
                             self.showShape = false
                         } else {
@@ -59,8 +59,8 @@ struct ContentView: View {
 
 var itemFormatter: DateFormatter {
     let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
+    formatter.dateStyle = .long
+    formatter.timeStyle = .long
     return formatter
 }
 extension ContentView {
