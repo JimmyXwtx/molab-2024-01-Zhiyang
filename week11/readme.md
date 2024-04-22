@@ -12,7 +12,7 @@ Deafblind individuals use a variety of communication methods based on their spec
 
 1. **Tactile Sign Language**:
    - **How it works**: Tactile Sign Language is adapted from visual sign languages for tactile reception. Deafblind individuals place their hands over the signer's hands to feel the movements and shapes of signs. This method enables them to perceive the gestures through physical contact, facilitating communication through touch.
-   - **Relevant research**: For a deeper understanding, see Janssen & Rødbroe's detailed exploration in ["Tactile Signing for People Who Are Deaf-Blind"](https://www.example.com).
+   - **Relevant research**: For a deeper understanding, see the detailed exploration in ["Tactile signing"](https://www.ndcs.org.uk/information-and-support/language-and-communication/sign-language/tactile-signing/#:~:text=Tactile%20signing%20is%20a%20method,communicated%20through%20touch%20and%20movement.).
 
 2. **Deafblind Manual Alphabet**:
    - **How it works**: This method involves spelling out letters onto the palm of the deafblind person's hand using hand signs for each letter of the alphabet. The tactile feedback allows the deafblind person to 'feel' the words being communicated.
@@ -46,16 +46,8 @@ This section outlines tools and technologies that support communication for the 
 
 Here are several key research papers that provide foundational knowledge and insights into the development of communication tools for deafblind individuals:
 
-1. **Janssen, M., Rødbroe, I. "Tactile Signing for People Who Are Deaf-Blind"**: Discusses methods of tactile communication. [Access here](https://www.example.com)
-2. **Romero-Rey, M. C., Herrera, L.-J. "Technological Aids for the Deafblind"**: Provides an overview of assistive technologies. [Access here](https://www.example.com)
-3. **Bruce, J. K., Janssen, M. J. "Communication Interactions with Deafblind Children"**: Offers insights into communicating with deafblind children. [Access here](https://www.example.com)
-4. **Johansson, B., Gulliksen, J. "Adapting Mobile Technology for Individuals with Deafblindness"**: Discusses adaptations in mobile technology for deafblind users. [Access here](https://www.example.com)
-5. **Watkins, I., Armstrong, L. "Innovative Braille Technology"**: Discusses the development of braille-related technologies. [Access here](https://www.example.com)
-6. **Smith, D. O. "Assistive Technology for Communication of Individuals Who are Deafblind"**: A systematic review of technologies for deafblind communication. [Access here](https://www.example.com)
-7. **Patel, K. B., Stough, L. M. "Bridging the Communication Gap in Education and Therapy for the Deafblind"**: Covers educational and therapeutic tools for deafblind individuals. [Access here](https://www.example.com)
-8. **Sundqvist, A., Rönnberg, J. "Use of Assistive Technology by People with Dual Sensory Impairments"**: Provides psychological perspectives on the use of assistive technology. [Access here](https://www.example.com)
-9. **Johnson, L., Farris, J. "Improving Accessibility for Deafblind Mobile Device Users"**: Focuses on enhancing mobile device accessibility for the deafblind. [Access here](https://www.example.com)
-10. **Thompson, L., Robinson, S. "Development and Evaluation of a Digital Communication Tool for Individuals with Deafblindness"**: Details the development and evaluation of a digital communication tool for deafblind users. [Access here](https://www.example.com)
+1. **Tactile Signing**: Discusses methods of tactile communication. [Access here](https://www.ndcs.org.uk/information-and-support/language-and-communication/sign-language/tactile-signing/#:~:text=Tactile%20signing%20is%20a%20method,communicated%20through%20touch%20and%20movement.)
+
 
 
 
