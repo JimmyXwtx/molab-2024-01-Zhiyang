@@ -98,8 +98,8 @@ class ViewModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate {
         print("Playing Morse Code: \(morse)") // Debug: 输出摩斯代码
         DispatchQueue.global(qos: .userInitiated).async {
             let dotDuration: UInt32 = 200000 // microseconds
-            let dashDuration: UInt32 = 600000 // microseconds
-            let gapDuration: UInt32 = 200000 // microseconds between elements
+            let dashDuration: UInt32 = 800000 // microseconds
+            let gapDuration: UInt32 = 400000 // microseconds between elements
 
             for char in morse {
                 switch char {
