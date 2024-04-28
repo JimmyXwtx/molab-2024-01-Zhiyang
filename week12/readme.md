@@ -26,11 +26,11 @@ Morse code, a method of encoding text characters as sequences of two different s
 ### Designing the Vibration Dictionary
 
 The vibration dictionary employs a variety of vibration patterns to represent different Braille characters. Each pattern is a combination of short, long, double, and triple vibrations, interspersed with pauses to aid in distinguishing between characters.
--- *** S = Short vibration
--- *** L = Long vibration
--- *** P = Pause between vibrations
--- *** D = Double vibration (two quick vibrations in succession)
--- *** T = Triple vibration (three quick vibrations in succession)
+-- #### S = Short vibration
+-- #### L = Long vibration
+-- #### P = Pause between vibrations
+-- #### D = Double vibration (two quick vibrations in succession)
+-- #### T = Triple vibration (three quick vibrations in succession)
 
 #### Example Vibration Patterns
 
