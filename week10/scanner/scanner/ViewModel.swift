@@ -1,5 +1,3 @@
-
-
 import SwiftUI
 import AVFoundation
 import Foundation
@@ -15,7 +13,6 @@ private func configureAudioSession() {
         print("Audio session configuration failed")
     }
 }
-
 
 struct CameraView: UIViewControllerRepresentable {
     var session: AVCaptureSession
@@ -33,7 +30,6 @@ struct CameraView: UIViewControllerRepresentable {
         return viewController
     }
 
-    
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }
 
@@ -43,24 +39,24 @@ class ViewModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate {
     @Published var capturedImage: UIImage?
     @Published var lastScannedText: String = ""
     @Published var isLoading = false
-    // Morse code dictionary
-        private let morseCode: [Character: String] = [
-            "A": ".-", "B": "-...", "C": "-.-.", "D": "-..", "E": ".",
-            "F": "..-.", "G": "--.", "H": "....", "I": "..", "J": ".---",
-            "K": "-.-", "L": ".-..", "M": "--", "N": "-.", "O": "---",
-            "P": ".--.", "Q": "--.-", "R": ".-.", "S": "...", "T": "-",
-            "U": "..-", "V": "...-", "W": ".--", "X": "-..-", "Y": "-.--",
-            "Z": "--..", "1": ".----", "2": "..---", "3": "...--", "4": "....-",
-            "5": ".....", "6": "-....", "7": "--...", "8": "---..", "9": "----.",
-            "0": "-----", " ": " "
-        ]
+    
+    // Vibration pattern dictionary
+    private let vibrationPattern: [Character: String] = [
+        "A": "S", "B": "S P S", "C": "S P L", "D": "L P S", "E": "L",
+        "F": "D", "G": "T", "H": "S P S P S", "I": "S P L P S", "J": "L P S P L",
+        "K": "D P S", "L": "T P L", "M": "D P D", "N": "T P T", "O": "L P L P L",
+        "P": "S P D", "Q": "L P T", "R": "S P T P S", "S": "L P D P L", "T": "T P D",
+        "U": "D P L", "V": "T P S", "W": "L P D", "X": "D P T", "Y": "T P D P T",
+        "Z": "L P T P L", "1": "S", "2": "S P S", "3": "S P S P S", "4": "S P S P S P S",
+        "5": "S P S P S P S P S", "6": "L P L", "7": "L P L P L", "8": "L P L P L P L",
+        "9": "L P L P L P L P L", "0": "D P D", " ": "P P"
+    ]
     
     override init() {
-           super.init()
-           setupCamera()
-           configureAudioSession() // Ensure this line is correctly called in init
-       }
-       
+        super.init()
+        setupCamera()
+        configureAudioSession()
+    }
 
     private func setupCamera() {
         guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
@@ -88,37 +84,6 @@ class ViewModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate {
         }
         performOCR(image: image)
     }
-    
-    func textToMorse(_ text: String) -> String {
-            let uppercasedText = text.uppercased()
-            return uppercasedText.map { morseCode[$0, default: ""] }.joined(separator: " ")
-        }
-
-    func playMorse(_ morse: String) {
-        print("Playing Morse Code: \(morse)") // Debug: 输出摩斯代码
-        DispatchQueue.global(qos: .userInitiated).async {
-            let dotDuration: UInt32 = 200000 // microseconds
-            let dashDuration: UInt32 = 800000 // microseconds
-            let gapDuration: UInt32 = 400000 // microseconds between elements
-
-            for char in morse {
-                switch char {
-                case ".":
-                    AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-                    usleep(dotDuration)
-                case "-":
-                    AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-                    usleep(dashDuration)
-                default:
-                    usleep(gapDuration)
-                }
-                usleep(gapDuration) // Gap between dots/dashes
-                print("Vibrated for \(char)") // Debug: 输出震动的字符
-            }
-        }
-    }
-
-
 
     private func performOCR(image: UIImage) {
         guard let cgImage = image.cgImage else { return }
@@ -128,7 +93,7 @@ class ViewModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate {
             DispatchQueue.main.async {
                 let recognizedText = recognizedStrings.joined(separator: "\n")
                 self?.lastScannedText = recognizedText.isEmpty ? "No text found." : recognizedText
-                // Here, before calling speak, make the OpenAI API call
+                // Send OCR results to OpenAI
                 if !recognizedText.isEmpty {
                     self?.fetchResponseFromOpenAI(for: recognizedText)
                 }
@@ -143,15 +108,15 @@ class ViewModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate {
 
     private func fetchResponseFromOpenAI(for text: String) {
         self.isLoading = true
-        let fullPrompt = "Here is OCR results from an image: \"\(text)\". Can you summarize it to make people cannot understand what's it under 10 words, please strictly reply with the 10 words."
+        let fullPrompt = "This is a software for BlindDeaf, efficient word is important. Here is OCR results from an image: \"\(text)\". Can you summarize/guess it to make people cannot understand what's it under 3 words, please strictly reply with the 3 words about the content in the image."
         
         askForWords(prompt: fullPrompt) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let responseText):
                     self?.lastScannedText = responseText
-                    let morse = self?.textToMorse(responseText) ?? ""
-                    self?.playMorse(morse)
+                    let vibrationPattern = self?.textToVibration(responseText) ?? ""
+                    self?.playVibration(vibrationPattern)
                 case .failure(let error):
                     print("Error fetching from OpenAI: \(error.localizedDescription)")
                     self?.lastScannedText = "Error: Could not fetch response."
@@ -161,12 +126,39 @@ class ViewModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate {
         }
     }
 
-    
-    private func speak(text: String) {
-        let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-        let synthesizer = AVSpeechSynthesizer()
-        synthesizer.speak(utterance)
+    func textToVibration(_ text: String) -> String {
+        let uppercasedText = text.uppercased()
+        return uppercasedText.map { vibrationPattern[$0, default: ""] }.joined(separator: " P ")
+    }
+
+    func playVibration(_ pattern: String) {
+        print("Playing Vibration Pattern: \(pattern)")
+        DispatchQueue.global(qos: .userInitiated).async {
+            for part in pattern.split(separator: " ") {
+                switch part {
+                case "S":
+                    AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+                    usleep(200000) // Short vibration
+                case "L":
+                    AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+                    usleep(600000) // Long vibration
+                case "D":
+                    AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+                    usleep(100000) // Pause then vibrate again quickly
+                    AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+                case "T":
+                    AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+                    usleep(100000)
+                    AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+                    usleep(100000)
+                    AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+                case "P":
+                    usleep(300000) // Pause
+                default:
+                    usleep(300000) // Default pause
+                }
+            }
+        }
     }
 }
 
@@ -212,6 +204,7 @@ func askForWords(prompt: String, completion: @escaping (Result<String, Error>) -
             do {
                 if let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any], let choices = jsonObject["choices"] as? [[String: Any]], !choices.isEmpty, let text = choices[0]["text"] as? String {
                     completion(.success(text))
+                   
                 } else {
                     completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Error parsing JSON"])))
                 }

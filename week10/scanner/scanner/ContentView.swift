@@ -20,7 +20,7 @@ struct ContentView: View {
                         .foregroundColor(.white)
                         .padding(.top, 20) // Padding at the top for visibility
                 } else if !viewModel.lastScannedText.isEmpty {
-                    // Display last scanned text
+                    // Display last scanned text, which is the OpenAI summarized response
                     Text(viewModel.lastScannedText)
                         .padding()
                         .background(Color.gray.opacity(0.5))
@@ -60,4 +60,3 @@ struct ContentView: View {
         }
     }
 }
-
