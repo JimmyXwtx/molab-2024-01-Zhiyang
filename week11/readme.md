@@ -13,7 +13,8 @@ Deafblind individuals use a variety of communication methods based on their spec
 1. **Tactile Sign Language**:
    - **How it works**: Tactile Sign Language is adapted from visual sign languages for tactile reception. Deafblind individuals place their hands over the signer's hands to feel the movements and shapes of signs. This method enables them to perceive the gestures through physical contact, facilitating communication through touch.
    - **Relevant research**: For a deeper understanding, see the detailed exploration in ["Tactile signing"](https://www.ndcs.org.uk/information-and-support/language-and-communication/sign-language/tactile-signing/#:~:text=Tactile%20signing%20is%20a%20method,communicated%20through%20touch%20and%20movement.).
-![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
 2. **Deafblind Manual Alphabet**:
    - **How it works**: This method involves spelling out letters onto the palm of the deafblind person's hand using hand signs for each letter of the alphabet. The tactile feedback allows the deafblind person to 'feel' the words being communicated.
    - **Relevant research**: While specific studies focusing solely on the Deafblind Manual Alphabet are rare, this communication method is often included in broader discussions on tactile communication strategies for the deafblind.
@@ -47,6 +48,7 @@ This section outlines tools and technologies that support communication for the 
 Here are several key research papers that provide foundational knowledge and insights into the development of communication tools for deafblind individuals:
 
 1. **Tactile Signing**: Discusses methods of tactile communication. [Access here](https://www.ndcs.org.uk/information-and-support/language-and-communication/sign-language/tactile-signing/#:~:text=Tactile%20signing%20is%20a%20method,communicated%20through%20touch%20and%20movement.)
+2. **Vibration-based communication for deafblind people：A review of vibration-based communication devices**: [Access here](https://www.researchgate.net/publication/360513033_Vibration-based_communication_for_deafblind_people)
 
 
 
