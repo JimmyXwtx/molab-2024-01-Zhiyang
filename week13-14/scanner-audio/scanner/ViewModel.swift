@@ -111,21 +111,27 @@ class ViewModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate {
         let fullPrompt = "This is a software for BlindDeaf, efficient word is important. Here is OCR results from an image: \"\(text)\". Can you summarize/guess it to make people cannot understand what's it under 3 words, please strictly reply with the 3 words about the content in the image. Please Strickly 3 words"
         
         askForWords(prompt: fullPrompt) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let responseText):
-                    self?.lastScannedText = responseText
-                    let vibrationPattern = self?.textToVibration(responseText) ?? ""
-                    self?.playVibration(vibrationPattern)
-                case .failure(let error):
-                    print("Error fetching from OpenAI: \(error.localizedDescription)")
-                    self?.lastScannedText = "Error: Could not fetch response."
-                }
-                self?.isLoading = false
-            }
-        }
+                   DispatchQueue.main.async {
+                       self?.isLoading = false
+                       switch result {
+                       case .success(let responseText):
+                           self?.lastScannedText = responseText
+                           self?.speak(text: responseText)  // Speaking the response
+                           let vibrationPattern = self?.textToVibration(responseText) ?? ""
+                           self?.playVibration(vibrationPattern)
+                       case .failure(let error):
+                           print("Error fetching from OpenAI: \(error.localizedDescription)")
+                           self?.lastScannedText = "Error: Could not fetch response."
+                       }
+                   }
+               }
     }
-
+    func speak(text: String) {
+          let utterance = AVSpeechUtterance(string: text)
+          utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+          let synthesizer = AVSpeechSynthesizer()
+          synthesizer.speak(utterance)
+      }
     func textToVibration(_ text: String) -> String {
         let uppercasedText = text.uppercased()
         return uppercasedText.map { vibrationPattern[$0, default: ""] }.joined(separator: " P ")
