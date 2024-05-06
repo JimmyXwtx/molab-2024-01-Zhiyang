@@ -37,6 +37,7 @@ Current efforts are focused on refining the image upload and analysis process, w
 
 - **Enhancing AI Responsiveness:** Ongoing development aims to improve the AI's capability to provide faster and more accurate interpretations of both textual and contextual elements within images.
 - **User Experience Optimization:** We are continuously seeking ways to make the user interface more intuitive and accessible for the deafblind community.
+- **API: https://replicate.com/salesforce/blip
 
 ## Acknowledgements
 
